@@ -10,8 +10,8 @@ const register = () => {
     const [data, setData] = useState({ username: "", email: "", password: "" });
     const handleRegister = () => {
         registerUser(data.username, data.email, data.password)
-        .then((res) => {
-            appContext.setUser(res.data.user);
+        .then(() => {
+            appContext.setUser({ ...data });
         })
         .catch((err) => console.log(err));
     };
