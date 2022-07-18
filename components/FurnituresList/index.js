@@ -1,7 +1,24 @@
 import { Card, CardBody, CardImg, CardTitle, Col, Row } from "reactstrap";
 import Link from "next/link";
+import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
+
+const query = gql` 
+    {
+        furnitures {
+            id
+            name
+            description
+            image {
+                url
+            }
+        }
+    }
+`;
 
 const FurnitureList = () => {
+    const { loading, error, data } = useQuery(query);
+    console.log(data);
     return (
         <Row>
             <Col xs="6" sm="4">
