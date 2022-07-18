@@ -16,13 +16,16 @@ const query = gql`
     }
 `;
 
-const FurnitureList = () => {
+const FurnitureList = (props) => {
     const { loading, error, data } = useQuery(query);
-    
+
     if (data) {
+        const searchQuery = data.furnitures.filter((furniture) => 
+            furniture.name.toLowerCase().includes(props.search)
+        );
         return (
             <Row>
-                {data.furnitures.map((furniture) => (
+                {searchQuery.map((furniture) => (
                     <Col xs="6" sm="4" key={furniture.id}>
                         <Card style={{ margin: "0 0.5rem 20px 0.5rem" }}>
                             <CardImg src={`${process.env.NEXT_PUBLIC_API_URL}${furniture.image[0].url}`} top={true} style={{ height: 250 }} />
