@@ -19,6 +19,10 @@ const query = gql`
 const FurnitureList = (props) => {
     const { loading, error, data } = useQuery(query);
 
+    if (error) return "家具の読み込みに失敗しました";
+
+    if (loading) return <h1>読み込み中・・・</h1>;
+
     if (data) {
         const searchQuery = data.furnitures.filter((furniture) => 
             furniture.name.toLowerCase().includes(props.search)
