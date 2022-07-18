@@ -1,4 +1,5 @@
 import { Alert, Button, Col, Input, InputGroup, InputGroupText, Row } from "reactstrap";
+import FurnitureList from "../components/FurnituresList";
 
 const index = () => {
     return (
@@ -11,6 +12,7 @@ const index = () => {
                             <Input placeholder="家具名を入力してください" />
                         </InputGroup>
                     </div>
+                    <FurnitureList />
                 </Col>
             </Row>
             <style jsx>
