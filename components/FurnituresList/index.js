@@ -4,9 +4,9 @@ import Link from "next/link";
 const FurnitureList = () => {
     return (
         <Row>
-            <Col>
-                <Card>
-                    <CardImg src="" />
+            <Col xs="6" sm="4">
+                <Card style={{ margin: "0 0.5rem 20px 0.5rem" }}>
+                    <CardImg src="http://localhost:1337/uploads/thumbnail_chai2_8bf9042116.jpg" top={true} style={{ height: 250 }} />
                     <CardBody>
                         <CardTitle>椅子</CardTitle>
                         <CardTitle>さまざまな椅子があります。</CardTitle>
@@ -18,6 +18,23 @@ const FurnitureList = () => {
                     </div>
                 </Card>
             </Col>
+            <style jsx>
+                {`
+                    a {
+                        color: white;
+                    }
+                    a link {
+                        text-decoration: none;
+                        color: white;
+                    }
+                    a:hover {
+                        color: white;
+                    }
+                    .card-colums {
+                        column-count: 3;
+                    }
+                `}
+            </style>
         </Row>
     );
 }
