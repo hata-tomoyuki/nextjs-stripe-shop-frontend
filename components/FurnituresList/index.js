@@ -18,42 +18,48 @@ const query = gql`
 
 const FurnitureList = () => {
     const { loading, error, data } = useQuery(query);
-    console.log(data);
-    return (
-        <Row>
-            <Col xs="6" sm="4">
-                <Card style={{ margin: "0 0.5rem 20px 0.5rem" }}>
-                    <CardImg src="http://localhost:1337/uploads/thumbnail_chai2_8bf9042116.jpg" top={true} style={{ height: 250 }} />
-                    <CardBody>
-                        <CardTitle>椅子</CardTitle>
-                        <CardTitle>さまざまな椅子があります。</CardTitle>
-                    </CardBody>
-                    <div className="card-footer">
-                        <Link href="/furnitures?id=1" as="/furnitures?id=1">
-                            <a className="btn btn-primary">もっと見る</a>
-                        </Link>
-                    </div>
-                </Card>
-            </Col>
-            <style jsx>
-                {`
-                    a {
-                        color: white;
-                    }
-                    a link {
-                        text-decoration: none;
-                        color: white;
-                    }
-                    a:hover {
-                        color: white;
-                    }
-                    .card-colums {
-                        column-count: 3;
-                    }
-                `}
-            </style>
-        </Row>
-    );
+    
+    if (data) {
+        return (
+            <Row>
+                {data.furnitures.map((furniture) => (
+                    <Col xs="6" sm="4" key={furniture.id}>
+                        <Card style={{ margin: "0 0.5rem 20px 0.5rem" }}>
+                            <CardImg src={`${process.env.NEXT_PUBLIC_API_URL}${furniture.image[0].url}`} top={true} style={{ height: 250 }} />
+                            <CardBody>
+                                <CardTitle>{furniture.name}</CardTitle>
+                                <CardTitle>{furniture.description}</CardTitle>
+                            </CardBody>
+                            <div className="card-footer">
+                                <Link href={`/furnitures/${furniture.id}`} as={`/furnitures?id=${furniture.id}`}>
+                                    <a className="btn btn-primary">もっと見る</a>
+                                </Link>
+                            </div>
+                        </Card>
+                    </Col>
+                ))}
+                <style jsx>
+                    {`
+                        a {
+                            color: white;
+                        }
+                        a link {
+                            text-decoration: none;
+                            color: white;
+                        }
+                        a:hover {
+                            color: white;
+                        }
+                        .card-colums {
+                            column-count: 3;
+                        }
+                    `}
+                </style>
+            </Row>
+        );
+    } else {
+        return <h1>家具が見つかりませんでした。</h1>
+    }
 }
 
 export default FurnitureList;
